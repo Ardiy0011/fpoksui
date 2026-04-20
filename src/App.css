@@ -705,8 +705,7 @@
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  animation: wreathSpinIn 1.2s ease forwards;
-  animation-delay: 0.12s;
+  animation: wreathSpinIn 1.2s ease forwards, wreathRotate 20s linear 1.3s infinite;
   transform-origin: center;
 }
 
@@ -724,6 +723,15 @@
   to {
     opacity: 1;
     transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes wreathRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
