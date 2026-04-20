@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
-import heroImg1 from './assets/bg3.jpg'
-import heroImg2 from './assets/bg1.jpg'
+import heroImg from './assets/bg3.jpg'
 import wreathImg from './assets/wreath.png'
 import journeyImg1 from './assets/Journeyimages/photo_2026-04-20_11-49-20.jpg'
 import journeyImg2 from './assets/Journeyimages/photo_2026-04-20_11-49-23.jpg'
@@ -146,14 +145,6 @@ function App() {
     getCountdown(FALLBACK_EVENT.date),
   )
   const [journeyLightbox, setJourneyLightbox] = useState<string | null>(null)
-  const [heroActive, setHeroActive] = useState(0)
-
-  useEffect(() => {
-    const heroInterval = window.setInterval(() => {
-      setHeroActive((prev) => (prev === 0 ? 1 : 0))
-    }, 10000)
-    return () => window.clearInterval(heroInterval)
-  }, [])
 
   useEffect(() => {
     let splashDuration = 5000
@@ -201,7 +192,8 @@ function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed')
-            observer.unobserve(entry.target)
+          } else {
+            entry.target.classList.remove('revealed')
           }
         })
       },
@@ -269,8 +261,7 @@ function App() {
 
       <main className="wedding-page">
         <section className="hero-photo" aria-label="Couple hero image">
-          <img src={heroImg1} alt="FiiFii and Pokuah" className={`hero-image ${heroActive === 0 ? 'hero-image--active' : ''}`} />
-          <img src={heroImg2} alt="FiiFii and Pokuah" className={`hero-image hero-image--second ${heroActive === 1 ? 'hero-image--active' : ''}`} />
+          <img src={heroImg} alt="FiiFii and Pokuah" className="hero-image" />
           <div className="hero-overlay hero-animate">
             {/* Shared SVG gradient definition */}
             <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
@@ -341,34 +332,34 @@ function App() {
           </div>
 
           <div className="journey-grid">
-            <div className="journey-item journey-item--tall" onClick={() => setJourneyLightbox(journeyImg1)}>
+            <div className="journey-item journey-item--tall scroll-reveal" ref={revealRef} style={{ transitionDelay: '0s' }} onClick={() => setJourneyLightbox(journeyImg1)}>
               <img className="journey-img" src={journeyImg1} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg2)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.1s' }} onClick={() => setJourneyLightbox(journeyImg2)}>
               <img className="journey-img" src={journeyImg2} alt="" />
             </div>
-            <div className="journey-item journey-item--tall" onClick={() => setJourneyLightbox(journeyImg3)}>
+            <div className="journey-item journey-item--tall scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.2s' }} onClick={() => setJourneyLightbox(journeyImg3)}>
               <img className="journey-img" src={journeyImg3} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg4)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.3s' }} onClick={() => setJourneyLightbox(journeyImg4)}>
               <img className="journey-img" src={journeyImg4} alt="" />
             </div>
-            <div className="journey-monogram">
+            <div className="journey-monogram scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.4s' }}>
               <span>F &amp; P</span>
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg5)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.5s' }} onClick={() => setJourneyLightbox(journeyImg5)}>
               <img className="journey-img" src={journeyImg5} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg6)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.6s' }} onClick={() => setJourneyLightbox(journeyImg6)}>
               <img className="journey-img" src={journeyImg6} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg7)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.7s' }} onClick={() => setJourneyLightbox(journeyImg7)}>
               <img className="journey-img" src={journeyImg7} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg9)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.8s' }} onClick={() => setJourneyLightbox(journeyImg9)}>
               <img className="journey-img" src={journeyImg9} alt="" />
             </div>
-            <div className="journey-item" onClick={() => setJourneyLightbox(journeyImg10)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.9s' }} onClick={() => setJourneyLightbox(journeyImg10)}>
               <img className="journey-img" src={journeyImg10} alt="" />
             </div>
           </div>
@@ -395,7 +386,7 @@ function App() {
           <p>{eventDetails.reception.address}</p>
         </section>
 
-        <section className="section-block section-block--dark live-share-section scroll-reveal" ref={revealRef}>
+        {/* <section className="section-block section-block--dark live-share-section scroll-reveal" ref={revealRef}>
           <h3>Live Share</h3>
           <p>Scan the QR code at reception to upload your photos and videos.</p>
           <p>
@@ -403,9 +394,9 @@ function App() {
               Open Live Share
             </a>
           </p>
-        </section>
+        </section> */}
 
-        <section className="section-block scroll-reveal" ref={revealRef}>
+        <section className="section-block section-block--dark scroll-reveal" ref={revealRef}>
           <h3>Photo Gallery</h3>
           <p>View all the wonderful moments captured by our guests.</p>
           <a className="scroll-link" href="/gallery/fp-live-2026">
