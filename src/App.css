@@ -10,8 +10,8 @@
 /* ── Hero ── */
 .hero-photo {
   position: relative;
-  height: 75vh;
-  min-height: 520px;
+  height: 70vh;
+  min-height: 480px;
   overflow: hidden;
 }
 
@@ -49,8 +49,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 3.5rem;
-  gap: 0.6rem;
+  padding-bottom: 2.5rem;
+  gap: 0.35rem;
   text-align: center;
   background: linear-gradient(180deg,
       rgba(8, 15, 15, 0.05) 0%,
@@ -248,7 +248,7 @@
 /* ── Invite Card — seamless from hero ── */
 .invite-card {
   position: relative;
-  padding: 2.5rem 1.3rem 2.4rem;
+  padding: 1.8rem 1.3rem 2rem;
   background: var(--surface);
   text-align: center;
 }
@@ -268,7 +268,7 @@
 }
 
 .event-date {
-  margin: 0.4rem 0 1.2rem;
+  margin: 0.3rem 0 0.8rem;
   font-family: var(--font-serif);
   letter-spacing: 0.05em;
   text-transform: uppercase;
