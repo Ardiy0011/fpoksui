@@ -1,0 +1,439 @@
+/* ===================================
+   Live Share Page — Midnight Gala
+   =================================== */
+
+.live-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 0 1rem 2.5rem;
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+}
+
+/* ── Header ── */
+.live-header {
+    position: relative;
+    padding: 1.2rem 0 0.6rem;
+    max-width: 560px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(62, 42, 24, 0.3);
+}
+
+.live-back {
+    position: absolute;
+    left: 0;
+    top: 1.2rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: opacity 0.15s;
+}
+
+.live-back:hover {
+    opacity: 0.7;
+}
+
+.live-title-group {
+    text-align: center;
+    flex: 1;
+}
+
+.live-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    line-height: 1.2;
+}
+
+.live-subtitle {
+    margin: 0.15rem 0 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(180, 120, 140, 0.7);
+}
+
+/* ── Quota Badge ── */
+.quota-badge {
+    max-width: 560px;
+    margin: 0.6rem auto 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.2rem;
+    font-size: 0.82rem;
+    color: var(--on-surface-variant);
+}
+
+.quota-count {
+    font-weight: 700;
+    font-size: 1rem;
+    color: rgba(180, 120, 140, 0.9);
+}
+
+.quota-sep {
+    opacity: 0.4;
+}
+
+.quota-limit {
+    font-weight: 600;
+}
+
+.quota-label {
+    margin-left: 0.25rem;
+    opacity: 0.7;
+}
+
+/* ── Dropzone ── */
+.dropzone {
+    position: relative;
+    max-width: 560px;
+    margin: 1.2rem auto 0;
+    min-height: 280px;
+    border: 2px dashed rgba(62, 42, 24, 0.5);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 2rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, min-height 0.3s;
+    background: rgba(62, 42, 24, 0.06);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.dropzone:hover {
+    border-color: rgba(62, 42, 24, 0.6);
+    background: rgba(62, 42, 24, 0.1);
+}
+
+.dropzone--over {
+    border-color: var(--primary);
+    background: rgba(62, 42, 24, 0.15);
+    border-style: solid;
+}
+
+.dropzone-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.dropzone-icon {
+    color: rgba(180, 120, 140, 0.6);
+}
+
+.dropzone-hint {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--on-surface);
+}
+
+.dropzone-limit {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--on-surface-variant);
+}
+
+/* ── Pending Grid ── */
+.pending-grid {
+    max-width: 560px;
+    margin: 1rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.65rem;
+}
+
+.pending-card {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-container);
+}
+
+.pending-thumb {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pending-thumb img,
+.pending-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pending-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.pending-remove:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.pending-type {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    font-size: 0.7rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.1rem 0.35rem;
+    pointer-events: none;
+}
+
+.pending-type:empty {
+    display: none;
+}
+
+/* ── Upload Button ── */
+.upload-btn {
+    display: block;
+    max-width: 560px;
+    width: 100%;
+    margin: 1.2rem auto 0;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(62, 42, 24, 0.35);
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.15s;
+}
+
+.upload-btn:hover:not(:disabled) {
+    background: rgba(62, 42, 24, 0.45);
+}
+
+.upload-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.upload-btn-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(8, 15, 15, 0.3);
+    border-top-color: var(--on-primary);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Toast / Status ── */
+.live-toast {
+    max-width: 560px;
+    margin: 0.8rem auto 0;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    text-align: center;
+    background: rgba(62, 42, 24, 0.15);
+    color: var(--primary);
+}
+
+.live-toast--error {
+    background: rgba(220, 60, 60, 0.12);
+    color: #f87171;
+}
+
+/* ── Uploaded Section ── */
+.uploaded-section {
+    max-width: 560px;
+    margin: 1.8rem auto 0;
+}
+
+.uploaded-heading {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--on-surface);
+}
+
+.uploaded-grid {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.uploaded-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.7rem;
+    border-radius: 10px;
+    background: var(--surface-container);
+}
+
+.uploaded-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.uploaded-icon {
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.uploaded-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uploaded-delete {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(220, 60, 60, 0.1);
+    color: #f87171;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.uploaded-delete:hover {
+    background: rgba(220, 60, 60, 0.2);
+}
+
+/* ── Uploaded Thumbnail Grid ── */
+.uploaded-thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.5rem;
+}
+
+.uploaded-thumb-card {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface-container);
+}
+
+.uploaded-thumb-card img,
+.uploaded-thumb-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.uploaded-thumb-delete {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.uploaded-thumb-card:hover .uploaded-thumb-delete {
+    opacity: 1;
+}
+
+.uploaded-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+}
+
+/* ── Loader ── */
+.live-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.loader-ring {
+    width: 40px;
+    height: 40px;
+    border: 2.5px solid rgba(180, 120, 140, 0.2);
+    border-top-color: rgba(180, 120, 140, 0.8);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+    .live-page {
+        padding: 0 2rem 3rem;
+    }
+
+    .dropzone:not(.dropzone--compact) {
+        min-height: 320px;
+    }
+
+    .pending-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .live-title {
+        font-size: 1.7rem;
+    }
+}

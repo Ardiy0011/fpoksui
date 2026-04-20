@@ -1,0 +1,310 @@
+.admin-page {
+    min-height: 100vh;
+    padding: 0 1rem 2.5rem;
+    background: #f5f3ee;
+    color: #3a3224;
+    font-family: var(--font-sans);
+}
+
+/* Login */
+.admin-login {
+    max-width: 360px;
+    margin: 15vh auto 0;
+    text-align: center;
+}
+
+.admin-login-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: #2f261a;
+    margin-bottom: 1rem;
+}
+
+.admin-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.admin-login-form input {
+    padding: 0.7rem 0.8rem;
+    border: 1px solid rgba(165, 128, 71, 0.25);
+    border-radius: 10px;
+    background: #fff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.admin-login-form input:focus {
+    border-color: #a58047;
+}
+
+.admin-login-form button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background: #7f5c2d;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.admin-login-form button:disabled {
+    opacity: 0.5;
+}
+
+.admin-error {
+    color: #a32929;
+    font-size: 0.82rem;
+    margin: 0;
+}
+
+.admin-dev-hint {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    color: #9a8868;
+}
+
+/* Header */
+.admin-header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.2rem 0 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+}
+
+.admin-logout {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(165, 128, 71, 0.3);
+    border-radius: 8px;
+    background: transparent;
+    color: #7a5a2e;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Tabs */
+.admin-tabs {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.3rem;
+    border-bottom: 1px solid rgba(165, 128, 71, 0.15);
+    padding-bottom: 0;
+}
+
+.admin-tabs button {
+    padding: 0.55rem 1rem;
+    border: none;
+    background: transparent;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #7a6d5a;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.admin-tabs button.active {
+    color: #7f5c2d;
+    border-bottom-color: #7f5c2d;
+}
+
+.admin-status {
+    max-width: 800px;
+    margin: 0.6rem auto 0;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    background: rgba(165, 128, 71, 0.08);
+    font-size: 0.82rem;
+    color: #5c4d34;
+}
+
+.admin-section {
+    max-width: 800px;
+    margin: 1rem auto 0;
+}
+
+.admin-empty {
+    color: #7a6d5a;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Media grid */
+.admin-media-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.admin-media-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(165, 128, 71, 0.1);
+    border-radius: 10px;
+}
+
+.admin-media-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ece4d3;
+    flex-shrink: 0;
+}
+
+.admin-media-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-media-icon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-media-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-media-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-media-meta {
+    font-size: 0.72rem;
+    color: #9a8868;
+}
+
+.admin-delete-btn {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(160, 40, 40, 0.2);
+    border-radius: 6px;
+    background: transparent;
+    color: #a04040;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.admin-delete-btn:hover {
+    background: rgba(160, 40, 40, 0.06);
+}
+
+/* Registry form */
+.admin-registry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-registry-form h3 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+}
+
+.admin-registry-form input {
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(165, 128, 71, 0.25);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.admin-registry-form button {
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    background: #7f5c2d;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-registry-list {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.4rem;
+}
+
+.admin-registry-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.7rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(165, 128, 71, 0.1);
+    border-radius: 10px;
+}
+
+.admin-registry-progress {
+    display: block;
+    font-size: 0.75rem;
+    color: #7a6d5a;
+}
+
+/* Settings */
+.admin-setting-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.6rem;
+}
+
+.admin-setting-row label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.admin-setting-row label span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #5c4d34;
+}
+
+.admin-setting-row input {
+    width: 80px;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(165, 128, 71, 0.25);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.admin-setting-row button {
+    padding: 0.55rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #7f5c2d;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}

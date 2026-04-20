@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Nunito+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Surface hierarchy — tonal stacking */
+  --surface: #1a1a1a;
+  --surface-dim: #0e0e0e;
+  --surface-container-low: #141414;
+  --surface-container: #1e1e1e;
+  --surface-container-high: #252525;
+  --surface-container-highest: #2c2c2c;
+  --surface-bright: rgba(40, 40, 40, 0.6);
+  --surface-variant: #2a2a2a;
+
+  /* Primary — warm gold */
+  --primary: #c9a84c;
+  --primary-container: #a58047;
+  --on-primary: #080f0f;
+
+  /* Secondary — muted champagne */
+  --secondary: #d4b896;
+  --secondary-container: #2a2118;
+  --on-secondary-container: #e8d5bc;
+
+  /* Tertiary — bright gold leaf (use sparingly) */
+  --tertiary: #e8c547;
+
+  /* Accent — muted turquoise (use in smidges) */
+  --accent-teal: #7fb5a8;
+
+  /* Text hierarchy */
+  --on-surface: #ede6db;
+  --on-surface-variant: #a09686;
+
+  /* Outline */
+  --outline-variant: rgba(80, 70, 55, 0.25);
+
+  /* Fonts — original wedding fonts */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-sans: 'Nunito Sans', 'Segoe UI', sans-serif;
+
+  /* Aliases used throughout the app */
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
+  --text-primary: var(--on-surface);
+  --text-muted: var(--on-surface-variant);
+  --accent: var(--primary);
+  --bg: var(--surface);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--surface);
+  font-family: var(--font-body);
+  color: var(--on-surface);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
