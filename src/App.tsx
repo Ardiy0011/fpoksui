@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
-import heroImg from './assets/bg3.jpg'
+import heroImg from './assets/bg1.jpg'
 import wreathImg from './assets/wreath.png'
 import journeyImg1 from './assets/Journeyimages/photo_2026-04-20_11-49-20.jpg'
 import journeyImg2 from './assets/Journeyimages/photo_2026-04-20_11-49-23.jpg'
@@ -44,7 +44,7 @@ const FALLBACK_EVENT: EventDetails = {
     mapEmbedUrl:
       'https://www.google.com/maps?q=Presbyterian+Church+of+Ghana+Hope+Congregation+Accra&output=embed',
     directionsUrl:
-      'https://www.google.com/maps/search/Presbyterian+Church+of+Ghana+Hope+Congregation+Accra',
+      'https://www.google.com/maps/dir/?api=1&destination=Presbyterian+Church+of+Ghana+Hope+Congregation+Accra',
   },
   reception: {
     title: 'Wedding Reception',
@@ -54,7 +54,7 @@ const FALLBACK_EVENT: EventDetails = {
     mapEmbedUrl:
       'https://www.google.com/maps?q=Fountain+Head+Christian+School+Accra&output=embed',
     directionsUrl:
-      'https://www.google.com/maps/search/Fountain+Head+Christian+School+Accra',
+      'https://www.google.com/maps/dir/?api=1&destination=Fountain+Head+Christian+School+Accra',
   },
 }
 
