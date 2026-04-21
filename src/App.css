@@ -73,15 +73,13 @@
   line-height: 1;
 }
 
-.hero-initials > span:not(.hero-amp) {
-  background: linear-gradient(
-    180deg,
-    #f2d885 0%,
-    #c9a84c 30%,
-    #a8893d 55%,
-    #7a6222 80%,
-    #c9a84c 100%
-  );
+.hero-initials>span:not(.hero-amp) {
+  background: linear-gradient(180deg,
+      #f2d885 0%,
+      #c9a84c 30%,
+      #a8893d 55%,
+      #7a6222 80%,
+      #c9a84c 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -572,12 +570,20 @@
 }
 
 @keyframes typewriter {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); border-right-color: transparent; }
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    border-right-color: transparent;
+  }
 }
 
 @keyframes blinkCaret {
-  50% { border-right-color: transparent; }
+  50% {
+    border-right-color: transparent;
+  }
 }
 
 .section-block p {
