@@ -23,8 +23,6 @@
   object-fit: cover;
   object-position: center 35%;
   display: block;
-  animation: hero-ken-burns 18s ease-in-out infinite alternate;
-  transform-origin: center center;
 }
 
 @keyframes hero-ken-burns {
@@ -65,25 +63,38 @@
 /* ── Centered Initials in Hero ── */
 .hero-initials {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
-  gap: 0.35rem;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 4px 30px rgba(201, 168, 76, 0.25);
-  letter-spacing: 0.04em;
+  gap: 0.15rem;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
   line-height: 1;
+}
+
+.hero-initials > span:not(.hero-amp) {
+  background: linear-gradient(
+    180deg,
+    #f2d885 0%,
+    #c9a84c 30%,
+    #a8893d 55%,
+    #7a6222 80%,
+    #c9a84c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
 
 .hero-amp {
   font-family: var(--font-script);
-  font-size: 0.55em;
+  font-size: 0.5em;
   font-weight: 400;
   color: var(--primary);
-  opacity: 0.9;
-  margin: 0 0.1em;
+  margin: 0 0.2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .hero-kicker {
@@ -541,12 +552,32 @@
   padding-bottom: 3rem;
 }
 
-.section-block h3 {
+.section-block h3,
+.section-block-title {
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-family: var(--font-script);
+  font-size: 2rem;
+  font-weight: 400;
   color: var(--on-surface);
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  border-right: 2px solid var(--primary);
+}
+
+.scroll-reveal.revealed .section-block-title,
+.scroll-reveal.revealed h3 {
+  animation: typewriter 1.7s steps(30, end) forwards, blinkCaret 0.65s step-end 4;
+}
+
+@keyframes typewriter {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); border-right-color: transparent; }
+}
+
+@keyframes blinkCaret {
+  50% { border-right-color: transparent; }
 }
 
 .section-block p {
@@ -1023,12 +1054,12 @@
 }
 
 .quote-highlight {
-  color: rgba(180, 120, 140, 0.9);
+  color: var(--on-surface);
   font-style: italic;
 }
 
 .quote-highlight-teal {
-  color: rgba(127, 181, 168, 0.6);
+  color: var(--on-surface);
   font-style: italic;
 }
 

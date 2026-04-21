@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
-import heroImg from './assets/bg1.jpg'
+import heroVid from './assets/vids/vidimg3.mp4'
 import wreathImg from './assets/wreath.png'
 import journeyImg1 from './assets/Journeyimages/photo_2026-04-20_11-49-20.jpg'
 import journeyImg2 from './assets/Journeyimages/photo_2026-04-20_11-49-23.jpg'
@@ -145,6 +145,8 @@ function App() {
     getCountdown(FALLBACK_EVENT.date),
   )
   const [journeyLightbox, setJourneyLightbox] = useState<string | null>(null)
+  const heroVideoRef = useRef<HTMLVideoElement>(null)
+  const videoReady = useRef(false)
 
   useEffect(() => {
     let splashDuration = 5000
@@ -165,6 +167,34 @@ function App() {
 
     return () => window.clearTimeout(splashTimer)
   }, [])
+
+  // Start hero video only after splash is gone AND video is ready
+  useEffect(() => {
+    const vid = heroVideoRef.current
+    if (!vid || showSplash) return
+
+    function tryPlay() {
+      if (!vid) return
+      vid.play().catch(() => {
+        // Video not ready yet — retry shortly
+        window.setTimeout(tryPlay, 200)
+      })
+    }
+
+    if (videoReady.current || vid.readyState >= 3) {
+      tryPlay()
+    } else {
+      // Wait for the video to be loadable, then play
+      const onReady = () => {
+        videoReady.current = true
+        tryPlay()
+      }
+      vid.addEventListener('canplay', onReady, { once: true })
+      // Also force a load in case browser stalled
+      vid.load()
+      return () => vid.removeEventListener('canplay', onReady)
+    }
+  }, [showSplash])
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -192,8 +222,7 @@ function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed')
-          } else {
-            entry.target.classList.remove('revealed')
+            observer.unobserve(entry.target)
           }
         })
       },
@@ -260,8 +289,18 @@ function App() {
       )}
 
       <main className="wedding-page">
-        <section className="hero-photo" aria-label="Couple hero image">
-          <img src={heroImg} alt="FiiFii and Pokuah" className="hero-image" />
+        <section className="hero-photo" aria-label="Couple hero video">
+          <video
+            ref={heroVideoRef}
+            className="hero-image"
+            src={heroVid}
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
+            onCanPlay={() => { videoReady.current = true }}
+          />
           <div className="hero-overlay hero-animate">
             {/* Shared SVG gradient definition */}
             <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
@@ -327,8 +366,8 @@ function App() {
 
         {/* ── Our Journey ── */}
         <section className="journey-section">
-          <div className="journey-header">
-            <h2 className="journey-title">Our Journey</h2>
+          <div className="journey-header scroll-reveal" ref={revealRef}>
+            <h2 className="journey-title section-block-title">Our Journey</h2>
           </div>
 
           <div className="journey-grid">
