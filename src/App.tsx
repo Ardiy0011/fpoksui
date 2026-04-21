@@ -140,6 +140,7 @@ function FlipUnit({ value, label }: FlipUnitProps) {
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
+  const [splashEnding, setSplashEnding] = useState(false)
   const eventDetails = FALLBACK_EVENT
   const [countdown, setCountdown] = useState<CountdownState>(() =>
     getCountdown(FALLBACK_EVENT.date),
@@ -147,6 +148,26 @@ function App() {
   const [journeyLightbox, setJourneyLightbox] = useState<string | null>(null)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
   const videoReady = useRef(false)
+
+  // Preload and warm the hero video while splash is visible
+  useEffect(() => {
+    const vid = heroVideoRef.current
+    if (!vid) return
+
+    const markReady = () => {
+      videoReady.current = true
+    }
+
+    vid.preload = 'auto'
+    vid.load()
+    vid.addEventListener('canplay', markReady)
+    vid.addEventListener('canplaythrough', markReady)
+
+    return () => {
+      vid.removeEventListener('canplay', markReady)
+      vid.removeEventListener('canplaythrough', markReady)
+    }
+  }, [])
 
   useEffect(() => {
     let splashDuration = 7000
@@ -161,23 +182,31 @@ function App() {
       splashDuration = 9000
     }
 
+    const preStartDelay = Math.max(0, splashDuration - 500)
+    const preStartTimer = window.setTimeout(() => {
+      setSplashEnding(true)
+    }, preStartDelay)
+
     const splashTimer = window.setTimeout(() => {
       setShowSplash(false)
     }, splashDuration)
 
-    return () => window.clearTimeout(splashTimer)
+    return () => {
+      window.clearTimeout(preStartTimer)
+      window.clearTimeout(splashTimer)
+    }
   }, [])
 
-  // Start hero video only after splash is gone AND video is ready
+  // Start hero video when splash is ending (0.5s early) and keep it playing after reveal
   useEffect(() => {
     const vid = heroVideoRef.current
-    if (!vid || showSplash) return
+    if (!vid || (!splashEnding && showSplash)) return
 
     function tryPlay() {
       if (!vid) return
       vid.play().catch(() => {
         // Video not ready yet — retry shortly
-        window.setTimeout(tryPlay, 200)
+        window.setTimeout(tryPlay, 80)
       })
     }
 
@@ -194,7 +223,7 @@ function App() {
       vid.load()
       return () => vid.removeEventListener('canplay', onReady)
     }
-  }, [showSplash])
+  }, [showSplash, splashEnding])
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -300,7 +329,7 @@ function App() {
         <section className="hero-photo" aria-label="Couple hero video">
           <video
             ref={heroVideoRef}
-            className="hero-image"
+            className={`hero-image ${!showSplash ? 'hero-image--reveal' : ''}`}
             src={heroVid}
             muted
             playsInline

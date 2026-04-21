@@ -24,7 +24,10 @@
   object-position: center 35%;
   display: block;
   filter: grayscale(1);
-  animation: heroDesaturate 3s ease forwards;
+}
+
+.hero-image--reveal {
+  animation: heroDesaturate 2.2s ease forwards;
 }
 
 @keyframes heroDesaturate {
