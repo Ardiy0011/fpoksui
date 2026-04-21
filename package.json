@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./node_modules/vite/bin/vite.js",
     "dev": "node ./node_modules/vite/bin/vite.js",
-    "build": "tsc -b && node ./node_modules/vite/bin/vite.js build",
-    "lint": "eslint .",
+    "build": "node ./node_modules/typescript/bin/tsc -b && node ./node_modules/vite/bin/vite.js build",
+    "lint": "node ./node_modules/eslint/bin/eslint.js .",
     "preview": "node ./node_modules/vite/bin/vite.js preview"
   },
   "dependencies": {

@@ -473,12 +473,20 @@ function App() {
         </section> */}
 
         <section className="section-block section-block--dark scroll-reveal" ref={revealRef}>
-          <h3>Photo Gallery</h3>
-          <p>View all the wonderful moments captured by our guests.</p>
-          <a className="scroll-link" href="/gallery/fp-live-2026">
+          <h3>Couples Gallery</h3>
+          <p>Browse through our favourite moments together as a couple.</p>
+          <a className="scroll-link" href="/gallery">
             View Gallery
           </a>
         </section>
+
+        {/* <section className="section-block scroll-reveal" ref={revealRef}>
+          <h3>Live Share</h3>
+          <p>Share your photos and videos from the celebration with everyone.</p>
+          <a className="scroll-link" href="/live/fp-live-2026">
+            Open Live Gallery
+          </a>
+        </section> */}
 
         {/* <section className="section-block scroll-reveal" ref={revealRef}>
           <h3>Gift Registry</h3>

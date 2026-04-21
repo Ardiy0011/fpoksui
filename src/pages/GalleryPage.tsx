@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { io as socketIo } from 'socket.io-client'
+import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './GalleryPage.css'
 
 import journeyImg1 from '../assets/Journeyimages/photo_2026-04-20_11-49-20.jpg'
@@ -23,15 +22,6 @@ type GalleryItem = {
   created_at: string
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000'
-
-function resolveUrl(url: string) {
-  if (url.startsWith('/uploads') || url.startsWith('/api')) {
-    return `${API_BASE_URL}${url}`
-  }
-  return url
-}
-
 /* Dummy images from Journey folder shown when the real gallery is empty */
 const DUMMY_ITEMS: GalleryItem[] = [
   { id: 'd1', type: 'image', url_thumb: journeyImg1, url_medium: journeyImg1, url_full: journeyImg1, created_at: '2026-04-25T10:00:00Z' },
@@ -47,70 +37,23 @@ const DUMMY_ITEMS: GalleryItem[] = [
 ]
 
 export default function GalleryPage() {
-  const { token = 'fp-live-2026' } = useParams()
-  const [items, setItems] = useState<GalleryItem[]>([])
-  const [loading, setLoading] = useState(true)
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null)
   const [filter, setFilter] = useState<'all' | 'image' | 'video'>('all')
   const [menuOpen, setMenuOpen] = useState(false)
   const [notification, setNotification] = useState<string | null>(null)
   const notifyTimer = useRef<number>(0)
 
-  async function loadGallery() {
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/gallery/${token}`)
-      if (res.ok) {
-        const data = (await res.json()) as { items: GalleryItem[] }
-        setItems(data.items)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    void loadGallery()
-  }, [token])
-
   function showNotification(msg: string) {
     window.clearTimeout(notifyTimer.current)
     setNotification(null)
-    // Force re-render so animation restarts
     requestAnimationFrame(() => {
       setNotification(msg)
       notifyTimer.current = window.setTimeout(() => setNotification(null), 3200)
     })
   }
 
-  // Real-time updates
-  useEffect(() => {
-    const socket = socketIo(API_BASE_URL, { transports: ['websocket', 'polling'] })
-    socket.on('connect', () => {
-      socket.emit('join:session', token)
-    })
-    socket.on('media:new', () => {
-      void loadGallery()
-      showNotification('A guest just shared a photo ✨')
-    })
-    socket.on('media:deleted', () => void loadGallery())
-    return () => { socket.disconnect() }
-  }, [token])
-
-  useEffect(() => {
-    return () => window.clearTimeout(notifyTimer.current)
-  }, [])
-
-  /* Use real items if available, otherwise show dummy placeholders */
-  const displayItems = items.length > 0 ? items : DUMMY_ITEMS
+  const displayItems = DUMMY_ITEMS
   const filtered = filter === 'all' ? displayItems : displayItems.filter((i) => i.type === filter)
-
-  if (loading) {
-    return (
-      <main className="gallery-page">
-        <div className="gallery-loader"><div className="loader-ring" /></div>
-      </main>
-    )
-  }
 
   return (
     <main className="gallery-page">
@@ -122,7 +65,7 @@ export default function GalleryPage() {
 
       <header className="gallery-header">
         <Link to="/" className="gallery-back">← Home</Link>
-        <h1 className="gallery-title">Photo Gallery</h1>
+        <h1 className="gallery-title">Couples Gallery</h1>
       </header>
 
       <div className="gallery-filters">
@@ -142,10 +85,10 @@ export default function GalleryPage() {
             tabIndex={0}
           >
             {item.type === 'image' ? (
-              <img src={resolveUrl(item.url_thumb)} alt="" loading="lazy" />
+              <img src={item.url_thumb} alt="" loading="lazy" />
             ) : (
               <div className="gallery-video-thumb">
-                <video src={resolveUrl(item.url_thumb)} muted preload="metadata" />
+                <video src={item.url_thumb} muted preload="metadata" />
                 <span className="play-icon">▶</span>
               </div>
             )}
@@ -187,16 +130,17 @@ export default function GalleryPage() {
 
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             {lightbox.type === 'image' ? (
-              <img src={resolveUrl(lightbox.url_full)} alt="" />
+              <img src={lightbox.url_full} alt="" />
             ) : (
-              <video src={resolveUrl(lightbox.url_full)} controls autoPlay />
+              <video src={lightbox.url_full} controls autoPlay />
             )}
             <div className="lightbox-actions">
               <a
-                href={resolveUrl(lightbox.url_full)}
-                download
+                href={lightbox.url_full}
                 className="lightbox-action-btn"
-                title="Download"
+                title="Open full size"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
               >
                 ↓
@@ -211,25 +155,27 @@ export default function GalleryPage() {
                 {menuOpen && (
                   <div className="lightbox-menu" onClick={(e) => e.stopPropagation()}>
                     <a
-                      href={resolveUrl(lightbox.url_full)}
-                      download
+                      href={lightbox.url_full}
                       className="lightbox-menu-item"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      📥 Download Full Size
+                      🔎 Open Full Size
                     </a>
                     <a
-                      href={resolveUrl(lightbox.url_medium)}
-                      download
+                      href={lightbox.url_medium}
                       className="lightbox-menu-item"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      📱 Download Medium
+                      📱 Open Medium
                     </a>
                     <button
                       type="button"
                       className="lightbox-menu-item"
                       onClick={async () => {
                         try {
-                          await navigator.clipboard.writeText(resolveUrl(lightbox.url_full))
+                          await navigator.clipboard.writeText(lightbox.url_full)
                           setMenuOpen(false)
                           showNotification('Link copied to clipboard')
                         } catch { /* clipboard not supported */ }
