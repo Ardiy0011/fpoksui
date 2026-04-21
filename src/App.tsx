@@ -149,16 +149,16 @@ function App() {
   const videoReady = useRef(false)
 
   useEffect(() => {
-    let splashDuration = 5000
+    let splashDuration = 7000
 
     try {
       const hasSeenSplash = window.localStorage.getItem(SPLASH_SEEN_KEY) === 'true'
       if (!hasSeenSplash) {
-        splashDuration = 8000
+        splashDuration = 9000
         window.localStorage.setItem(SPLASH_SEEN_KEY, 'true')
       }
     } catch {
-      splashDuration = 8000
+      splashDuration = 9000
     }
 
     const splashTimer = window.setTimeout(() => {
@@ -275,16 +275,24 @@ function App() {
     <>
       {showSplash && (
         <section className="splash-screen" aria-label="Loading wedding welcome">
-          <div className="splash-wreath" aria-hidden="true">
-            <img className="wreath-image" src={wreathImg} alt="" />
-            <div className="splash-initials">
-              <span className="glyph glyph-f">F</span>
-              <span className="glyph glyph-amp">&amp;</span>
-              <span className="glyph glyph-p">P</span>
+          {/* Envelope flap — triangular top that lifts open */}
+          <div className="envelope-flap" aria-hidden="true" />
+          {/* Envelope lining visible behind the flap */}
+          <div className="envelope-lining" aria-hidden="true" />
+
+          {/* Wreath seal + initials + text */}
+          <div className="envelope-content">
+            <div className="splash-wreath" aria-hidden="true">
+              <img className="wreath-image" src={wreathImg} alt="" />
+              <div className="splash-initials">
+                <span className="glyph glyph-f">F</span>
+                <span className="glyph glyph-amp">&amp;</span>
+                <span className="glyph glyph-p">P</span>
+              </div>
             </div>
+            <p className="splash-title">FiiFii &amp; Pokuah</p>
+            <p className="splash-twi">Aware fofro te se ode</p>
           </div>
-          <p className="splash-title">FiiFii &amp; Pokuah</p>
-          <p className="splash-twi">Aware fofro te se ode</p>
         </section>
       )}
 
@@ -395,11 +403,11 @@ function App() {
             <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.7s' }} onClick={() => setJourneyLightbox(journeyImg7)}>
               <img className="journey-img" src={journeyImg7} alt="" />
             </div>
-            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.8s' }} onClick={() => setJourneyLightbox(journeyImg9)}>
-              <img className="journey-img" src={journeyImg9} alt="" />
-            </div>
-            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.9s' }} onClick={() => setJourneyLightbox(journeyImg10)}>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.8s' }} onClick={() => setJourneyLightbox(journeyImg10)}>
               <img className="journey-img" src={journeyImg10} alt="" />
+            </div>
+            <div className="journey-item scroll-reveal" ref={revealRef} style={{ transitionDelay: '0.9s' }} onClick={() => setJourneyLightbox(journeyImg9)}>
+              <img className="journey-img" src={journeyImg9} alt="" />
             </div>
           </div>
 

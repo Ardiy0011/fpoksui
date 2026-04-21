@@ -157,6 +157,34 @@ export default function GalleryPage() {
       {lightbox && (
         <div className="lightbox" onClick={() => { setLightbox(null); setMenuOpen(false) }} role="dialog">
           <button className="lightbox-close" onClick={() => { setLightbox(null); setMenuOpen(false) }}>✕</button>
+
+          {/* Prev / Next arrows */}
+          {(() => {
+            const idx = filtered.findIndex((i) => i.id === lightbox.id)
+            return (
+              <>
+                {idx > 0 && (
+                  <button
+                    className="lightbox-arrow lightbox-arrow--prev"
+                    onClick={(e) => { e.stopPropagation(); setLightbox(filtered[idx - 1]); setMenuOpen(false) }}
+                    aria-label="Previous"
+                  >
+                    ‹
+                  </button>
+                )}
+                {idx < filtered.length - 1 && (
+                  <button
+                    className="lightbox-arrow lightbox-arrow--next"
+                    onClick={(e) => { e.stopPropagation(); setLightbox(filtered[idx + 1]); setMenuOpen(false) }}
+                    aria-label="Next"
+                  >
+                    ›
+                  </button>
+                )}
+              </>
+            )
+          })()}
+
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             {lightbox.type === 'image' ? (
               <img src={resolveUrl(lightbox.url_full)} alt="" />
