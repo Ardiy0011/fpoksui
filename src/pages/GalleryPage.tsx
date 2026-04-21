@@ -40,6 +40,7 @@ const DUMMY_ITEMS: GalleryItem[] = [
   { id: 'd12', type: 'image', url_thumb: bg2, url_medium: bg2, url_full: bg2, created_at: '2026-04-25T10:55:00Z' }
 ]
 
+
 export default function GalleryPage() {
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null)
   const [filter, setFilter] = useState<'all' | 'image' | 'video'>('all')
