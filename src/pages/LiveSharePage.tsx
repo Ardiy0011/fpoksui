@@ -66,7 +66,6 @@ export default function LiveSharePage() {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(true)
   const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([])
-  const [isDragOver, setIsDragOver] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [notification, setNotification] = useState<string | null>(null)
@@ -468,52 +467,45 @@ export default function LiveSharePage() {
               </div>
             )}
 
-            <div
-              className={`dropzone dropzone--compact ${isDragOver ? 'dropzone--over' : ''}`}
-              onDragOver={(event) => { event.preventDefault(); setIsDragOver(true) }}
-              onDragLeave={() => setIsDragOver(false)}
-              onDrop={(event) => {
-                event.preventDefault()
-                setIsDragOver(false)
-                appendPendingFiles(event.dataTransfer.files)
-              }}
-              onClick={() => fileInputRef.current?.click()}
-              role="button"
-              tabIndex={0}
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*,video/*"
-                multiple
-                className="dropzone-input"
-                onChange={(event) => { appendPendingFiles(event.target.files); event.target.value = '' }}
-              />
-              <input
-                ref={cameraInputRef}
-                type="file"
-                accept="image/*"
-                capture="environment"
-                className="dropzone-input"
-                onChange={(event) => { appendPendingFiles(event.target.files); event.target.value = '' }}
-              />
-              <div className="dropzone-icon" aria-hidden="true">
-                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="23" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 3" />
-                  <path d="M24 16v16M16 24h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <p className="dropzone-hint">Tap to select photos & videos</p>
-              <p className="dropzone-limit">Up to {uploadLimit} photos & videos</p>
+            {/* Hidden file inputs */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,video/*"
+              multiple
+              className="dropzone-input"
+              onChange={(event) => { appendPendingFiles(event.target.files); event.target.value = '' }}
+            />
+            <input
+              ref={cameraInputRef}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              className="dropzone-input"
+              onChange={(event) => { appendPendingFiles(event.target.files); event.target.value = '' }}
+            />
+
+            <div className="upload-actions">
+              <button
+                type="button"
+                className="upload-action-btn upload-action-btn--camera"
+                onClick={() => cameraInputRef.current?.click()}
+              >
+                <span className="upload-action-icon">📷</span>
+                <span className="upload-action-label">Take a Photo</span>
+              </button>
+
+              <button
+                type="button"
+                className="upload-action-btn upload-action-btn--gallery"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <span className="upload-action-icon">🖼️</span>
+                <span className="upload-action-label">Upload from Gallery</span>
+              </button>
             </div>
 
-            <button
-              type="button"
-              className="camera-btn"
-              onClick={() => cameraInputRef.current?.click()}
-            >
-              📷 Take a Photo
-            </button>
+            <p className="upload-limit-hint">Up to {uploadLimit} photos & videos</p>
 
             {hasFiles && (
               <section className="pending-grid" aria-label="Selected files">

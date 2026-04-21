@@ -180,83 +180,64 @@
     color: rgba(180, 120, 140, 0.7);
 }
 
-/* ── Dropzone ── */
-.dropzone {
-    position: relative;
-    max-width: 560px;
-    margin: 1.2rem auto 0;
-    min-height: 280px;
-    border: 2px dashed rgba(62, 42, 24, 0.5);
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 2rem 1rem;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s, min-height 0.3s;
-    background: rgba(62, 42, 24, 0.06);
-    -webkit-tap-highlight-color: transparent;
-}
-
-.dropzone:hover {
-    border-color: rgba(62, 42, 24, 0.6);
-    background: rgba(62, 42, 24, 0.1);
-}
-
-.dropzone--over {
-    border-color: var(--primary);
-    background: rgba(62, 42, 24, 0.15);
-    border-style: solid;
-}
-
+/* ── Upload Action Buttons ── */
 .dropzone-input {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    width: 0;
+    height: 0;
     opacity: 0;
-    cursor: pointer;
     pointer-events: none;
 }
 
-.dropzone-icon {
-    color: rgba(180, 120, 140, 0.6);
+.upload-actions {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 560px;
+    margin: 1.2rem auto 0;
+    justify-content: center;
 }
 
-.dropzone-hint {
-    margin: 0;
+.upload-action-btn {
+    flex: 1;
+    max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.4rem 1rem;
+    border: 1.5px solid rgba(62, 42, 24, 0.25);
+    border-radius: 16px;
+    background: rgba(62, 42, 24, 0.04);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.upload-action-btn:hover,
+.upload-action-btn:active {
+    border-color: var(--primary, #9a7b4f);
+    background: rgba(62, 42, 24, 0.1);
+    transform: scale(1.02);
+}
+
+.upload-action-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.upload-action-label {
     font-family: var(--font-serif);
-    font-size: 1.2rem;
+    font-size: 0.92rem;
     font-weight: 600;
-    color: var(--on-surface);
+    color: var(--on-surface, #1a1a1a);
 }
 
-.dropzone-limit {
-    margin: 0;
+.upload-limit-hint {
+    text-align: center;
+    margin: 0.6rem 0 0;
     font-size: 0.78rem;
     color: var(--on-surface-variant);
-}
-
-.camera-btn {
-    display: block;
-    margin: 0.75rem auto 0;
-    padding: 0.6rem 1.4rem;
-    font-size: 0.95rem;
-    border: 1.5px solid var(--outline, #b0b0b0);
-    border-radius: 24px;
-    background: transparent;
-    color: var(--on-surface, #1a1a1a);
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.camera-btn:hover,
-.camera-btn:active {
-    background: var(--primary, #9a7b4f);
-    color: #fff;
-    border-color: var(--primary, #9a7b4f);
 }
 
 /* ── Pending Grid ── */
