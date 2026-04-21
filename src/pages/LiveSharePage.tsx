@@ -372,53 +372,70 @@ export default function LiveSharePage() {
         </div>
       )}
 
-      {/* Header */}
-      <header className="live-header">
-        <Link to="/" className="live-back" aria-label="Back to home">← Home</Link>
-        <div className="live-title-group">
-          <h1 className="live-title">{session?.title || defaultSession.title}</h1>
-          <p className="live-subtitle">Live Gallery</p>
+      {/* Compact Header */}
+      <header className="live-bar">
+        <Link to="/" className="live-bar-back" aria-label="Back to home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
+
+        <div className="live-bar-center">
+          <h1 className="live-bar-title">{session?.title || defaultSession.title}</h1>
+          {totalCount > 0 && (
+            <span className="live-bar-count">
+              <span className="live-bar-dot" />
+              {totalCount} {totalCount === 1 ? 'moment' : 'moments'}
+            </span>
+          )}
         </div>
+
         <button
           type="button"
-          className="live-add-btn"
+          className="live-bar-share"
           onClick={() => setShowUploadModal(true)}
-          aria-label="Add photos"
+          aria-label="Share a moment"
         >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <circle cx="11" cy="11" r="10" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M11 6v10M6 11h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
       </header>
 
-      {/* Live count badge */}
-      {totalCount > 0 && (
-        <div className="live-count-badge" role="status">
-          <span className="live-count-dot" />
-          <span className="live-count-number">{totalCount}</span>
-          <span className="live-count-label">{totalCount === 1 ? 'photo shared' : 'photos shared'}</span>
-        </div>
-      )}
-
       {/* Filters */}
       <div className="gallery-filters">
-        <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
-        <button className={`filter-btn ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
-        <button className={`filter-btn ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
+        <button className={`filter-chip ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
+        <button className={`filter-chip ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
+        <button className={`filter-chip ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
         <span className="filter-count">{filtered.length} items</span>
       </div>
 
-      {/* Gallery Grid */}
+      {/* Empty State */}
       {filtered.length === 0 && !loading && (
         <div className="live-empty">
-          <p>No photos yet. Be the first to share!</p>
+          <div className="empty-illustration" aria-hidden="true">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="10" y="18" width="44" height="34" rx="6" stroke="currentColor" strokeWidth="1.2" opacity="0.3" />
+              <circle cx="24" cy="30" r="5" stroke="currentColor" strokeWidth="1" opacity="0.25" />
+              <path d="M10 44l12-9 8 6 10-8 14 11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.2" />
+              <rect x="26" y="28" width="44" height="34" rx="6" stroke="currentColor" strokeWidth="1.2" opacity="0.2" />
+              <path d="M56 20l3-4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+              <path d="M62 24l4-1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.2" />
+              <path d="M58 28l2 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.15" />
+            </svg>
+          </div>
+          <p className="empty-title">No moments yet</p>
+          <p className="empty-desc">Be the first to capture and share a special memory</p>
           <button type="button" className="live-empty-cta" onClick={() => setShowUploadModal(true)}>
-            Add Photos
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ marginRight: '6px', verticalAlign: '-2px' }}>
+              <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+            Share a Moment
           </button>
         </div>
       )}
 
+      {/* Gallery Grid */}
       <div className="gallery-grid">
         {filtered.map((item) => (
           <div
@@ -449,23 +466,45 @@ export default function LiveSharePage() {
       {showUploadModal && (
         <div className="upload-modal-overlay" onClick={() => { if (!isSaving) setShowUploadModal(false) }}>
           <div className="upload-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="upload-modal-header">
-              <h2 className="upload-modal-title">Share Your Photos</h2>
-              <button
-                type="button"
-                className="upload-modal-close"
-                onClick={() => { if (!isSaving) setShowUploadModal(false) }}
-              >✕</button>
-            </div>
+            <button
+              type="button"
+              className="upload-modal-close"
+              onClick={() => { if (!isSaving) setShowUploadModal(false) }}
+            >✕</button>
 
-            {quotaSummary && (
-              <div className="quota-badge" role="status">
-                <span className="quota-count">{quotaSummary.used}</span>
-                <span className="quota-sep">/</span>
-                <span className="quota-limit">{quotaSummary.limit}</span>
-                <span className="quota-label">uploaded</span>
+            {/* Illustration hero area */}
+            <div className="upload-hero">
+              <div className="upload-hero-icons">
+                <svg className="hero-icon hero-icon--camera" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="4" y="12" width="40" height="28" rx="6" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="24" cy="26" r="8" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="24" cy="26" r="4" fill="currentColor" opacity="0.15" />
+                  <path d="M16 12l2-4h12l2 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="36" cy="18" r="2" fill="currentColor" opacity="0.4" />
+                </svg>
+                <svg className="hero-icon hero-icon--heart" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9.9-1h.1A5 5 0 0 1 19 11c0 5.65-7 10-7 10z" fill="currentColor" opacity="0.25" stroke="currentColor" strokeWidth="1" />
+                </svg>
+                <svg className="hero-icon hero-icon--sparkle" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z" fill="currentColor" opacity="0.35" />
+                </svg>
+                <svg className="hero-icon hero-icon--photo" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                  <rect x="3" y="6" width="30" height="24" rx="4" stroke="currentColor" strokeWidth="1.2" />
+                  <circle cx="12" cy="15" r="3" stroke="currentColor" strokeWidth="1.2" />
+                  <path d="M3 24l8-6 5 4 6-5 11 8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </div>
-            )}
+
+              <h2 className="upload-hero-title">Share Your Moments</h2>
+              <p className="upload-hero-subtitle">Capture the magic — every photo tells a story</p>
+
+              {quotaSummary && (
+                <div className="quota-pill" role="status">
+                  <span className="quota-pill-dot" />
+                  <span>{quotaSummary.used} of {quotaSummary.limit} shared</span>
+                </div>
+              )}
+            </div>
 
             {/* Hidden file inputs */}
             <input
@@ -485,27 +524,49 @@ export default function LiveSharePage() {
               onChange={(event) => { appendPendingFiles(event.target.files); event.target.value = '' }}
             />
 
+            {/* Action cards */}
             <div className="upload-actions">
               <button
                 type="button"
-                className="upload-action-btn upload-action-btn--camera"
+                className="upload-action-card"
                 onClick={() => cameraInputRef.current?.click()}
               >
-                <span className="upload-action-icon">📷</span>
-                <span className="upload-action-label">Take a Photo</span>
+                <div className="action-card-icon">
+                  <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+                    <rect x="6" y="14" width="36" height="24" rx="5" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="24" cy="26" r="7" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="24" cy="26" r="3" fill="currentColor" opacity="0.2" />
+                    <path d="M17 14l2-4h10l2 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <span className="action-card-title">Take a Photo</span>
+                <span className="action-card-desc">Open your camera</span>
               </button>
 
               <button
                 type="button"
-                className="upload-action-btn upload-action-btn--gallery"
+                className="upload-action-card"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <span className="upload-action-icon">🖼️</span>
-                <span className="upload-action-label">Upload from Gallery</span>
+                <div className="action-card-icon">
+                  <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+                    <rect x="4" y="8" width="28" height="22" rx="4" stroke="currentColor" strokeWidth="1.5" />
+                    <rect x="16" y="18" width="28" height="22" rx="4" stroke="currentColor" strokeWidth="1.5" fill="var(--surface, #1a1a1a)" />
+                    <circle cx="24" cy="24" r="3" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M16 34l6-5 4 3 5-4 13 8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <span className="action-card-title">From Gallery</span>
+                <span className="action-card-desc">Choose photos &amp; videos</span>
               </button>
             </div>
 
-            <p className="upload-limit-hint">Up to {uploadLimit} photos & videos</p>
+            <p className="upload-limit-hint">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ verticalAlign: '-2px', marginRight: '4px' }}>
+                <path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z" fill="currentColor" opacity="0.5" />
+              </svg>
+              Up to {uploadLimit} photos &amp; videos
+            </p>
 
             {hasFiles && (
               <section className="pending-grid" aria-label="Selected files">
