@@ -205,8 +205,15 @@
 }
 
 @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
 }
 
 .live-bar-share {
@@ -879,24 +886,57 @@
 }
 
 @keyframes heroFloat {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50% { transform: translate(-50%, -50%) translateY(-4px); }
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(-4px);
+    }
 }
 
 @keyframes heroPopIn {
-    from { opacity: 0; transform: scale(0.3); }
-    to { opacity: 0.6; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    to {
+        opacity: 0.6;
+        transform: scale(1);
+    }
 }
 
 @keyframes heroBeat {
-    0%, 100% { transform: scale(1); }
-    15% { transform: scale(1.15); }
-    30% { transform: scale(1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
 }
 
 @keyframes heroTwinkle {
-    0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-    50% { opacity: 0.3; transform: scale(0.85) rotate(15deg); }
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(0.85) rotate(15deg);
+    }
 }
 
 .upload-hero-title {

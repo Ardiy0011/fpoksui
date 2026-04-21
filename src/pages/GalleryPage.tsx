@@ -63,16 +63,21 @@ export default function GalleryPage() {
         </div>
       )}
 
-      <header className="gallery-header">
-        <Link to="/" className="gallery-back">← Home</Link>
-        <h1 className="gallery-title">Couples Gallery</h1>
+      <header className="gallery-bar">
+        <Link to="/" className="gallery-bar-back" aria-label="Back to home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </Link>
+        <div className="gallery-bar-center">
+          <h1 className="gallery-bar-title">Couples Gallery</h1>
+          <span className="gallery-bar-count">{filtered.length} photos</span>
+        </div>
+        <div style={{ width: 34 }} />
       </header>
 
       <div className="gallery-filters">
-        <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
-        <button className={`filter-btn ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
-        <button className={`filter-btn ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
-        <span className="filter-count">{filtered.length} items</span>
+        <button className={`filter-chip ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
+        <button className={`filter-chip ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
+        <button className={`filter-chip ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
       </div>
 
       <div className="gallery-grid">
