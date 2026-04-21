@@ -56,9 +56,19 @@
     animation: glyphReveal 0.5s ease forwards;
 }
 
-.live-splash .glyph-f { animation-delay: 0.3s; }
-.live-splash .glyph-amp { animation-delay: 0.5s; font-size: 1.1rem; opacity: 0; }
-.live-splash .glyph-p { animation-delay: 0.7s; }
+.live-splash .glyph-f {
+    animation-delay: 0.3s;
+}
+
+.live-splash .glyph-amp {
+    animation-delay: 0.5s;
+    font-size: 1.1rem;
+    opacity: 0;
+}
+
+.live-splash .glyph-p {
+    animation-delay: 0.7s;
+}
 
 .live-splash .splash-title {
     margin: 0;
@@ -81,22 +91,46 @@
 }
 
 @keyframes splashPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
 }
 
 @keyframes wreathSpin {
-    from { transform: rotate(-15deg) scale(0.8); opacity: 0; }
-    to { transform: rotate(0deg) scale(1); opacity: 1; }
+    from {
+        transform: rotate(-15deg) scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes glyphReveal {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes splashFadeOut {
-    to { opacity: 0; pointer-events: none; }
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 .live-page {
@@ -217,6 +251,7 @@
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
 }
+
 .camera-btn:hover,
 .camera-btn:active {
     background: var(--primary, #9a7b4f);
@@ -579,8 +614,15 @@
 }
 
 @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
 }
 
 .live-count-number {
@@ -735,8 +777,13 @@
 }
 
 @keyframes modal-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .upload-modal {
@@ -751,8 +798,13 @@
 }
 
 @keyframes modal-slide-up {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 .upload-modal-header {
@@ -805,8 +857,13 @@
 }
 
 @keyframes gallery-lb-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .lightbox-close {
@@ -835,8 +892,15 @@
 }
 
 @keyframes gallery-lb-scale {
-    from { opacity: 0; transform: scale(0.85); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .lightbox-content img {
@@ -876,8 +940,13 @@
     background: rgba(50, 50, 50, 0.85);
 }
 
-.lightbox-arrow--prev { left: 0.75rem; }
-.lightbox-arrow--next { right: 0.75rem; }
+.lightbox-arrow--prev {
+    left: 0.75rem;
+}
+
+.lightbox-arrow--next {
+    right: 0.75rem;
+}
 
 .lightbox-actions {
     display: flex;
@@ -960,11 +1029,17 @@
 }
 
 @keyframes notifySlideIn {
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 @keyframes notifySlideOut {
-    to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
 }
 
 /* ── Desktop ── */
