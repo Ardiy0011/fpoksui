@@ -402,7 +402,7 @@ function App() {
         </section>
 
         {/* ── Our Journey ── */}
-        <section className="journey-section">
+        {/* <section className="journey-section">
           <div className="journey-header scroll-reveal" ref={revealRef}>
             <h2 className="journey-title section-block-title">Our Journey</h2>
           </div>
@@ -446,7 +446,7 @@ function App() {
               &ldquo;<span className="quote-highlight">Obaa</span> ye turom mu nhwiren, ne <span className="quote-highlight-teal">kunu</span> nso ye ne ho ban.&rdquo;
             </blockquote>
           </div>
-        </section>
+        </section> */}
 
         <section id="details" className="section-block event-section scroll-reveal" ref={revealRef}>
           <h3>{eventDetails.ceremony.title}</h3>

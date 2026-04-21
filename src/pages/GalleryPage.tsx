@@ -12,6 +12,8 @@ import journeyImg7 from '../assets/Journeyimages/photo_2026-04-20_11-49-36.jpg'
 import journeyImg8 from '../assets/Journeyimages/photo_2026-04-20_11-49-45.jpg'
 import journeyImg9 from '../assets/Journeyimages/photo_2026-04-20_11-49-48.jpg'
 import journeyImg10 from '../assets/Journeyimages/photo_2026-04-20_11-49-51.jpg'
+import bg1 from '../assets/bg1.jpg'
+import bg2 from '../assets/bg2.jpg'
 
 type GalleryItem = {
   id: string
@@ -34,6 +36,8 @@ const DUMMY_ITEMS: GalleryItem[] = [
   { id: 'd8', type: 'image', url_thumb: journeyImg8, url_medium: journeyImg8, url_full: journeyImg8, created_at: '2026-04-25T10:35:00Z' },
   { id: 'd9', type: 'image', url_thumb: journeyImg9, url_medium: journeyImg9, url_full: journeyImg9, created_at: '2026-04-25T10:40:00Z' },
   { id: 'd10', type: 'image', url_thumb: journeyImg10, url_medium: journeyImg10, url_full: journeyImg10, created_at: '2026-04-25T10:45:00Z' },
+  { id: 'd11', type: 'image', url_thumb: bg1, url_medium: bg1, url_full: bg1, created_at: '2026-04-25T10:50:00Z' },
+  { id: 'd12', type: 'image', url_thumb: bg2, url_medium: bg2, url_full: bg2, created_at: '2026-04-25T10:55:00Z' }
 ]
 
 export default function GalleryPage() {
