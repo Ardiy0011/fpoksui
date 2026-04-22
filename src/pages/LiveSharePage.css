@@ -552,7 +552,10 @@
 
 /* ── Upload Button ── */
 .upload-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
     max-width: 560px;
     width: 100%;
     margin: 1.2rem auto 0;
@@ -1163,6 +1166,7 @@
     color: var(--primary);
     font-size: 0.85rem;
     font-weight: 600;
+    white-space: nowrap;
     z-index: 9500;
     pointer-events: none;
     opacity: 0;
