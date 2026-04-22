@@ -1,5 +1,8 @@
 {
   "rewrites": [
+    { "source": "/backend/api/(.*)", "destination": "http://68.183.153.10:4000/api/$1" },
+    { "source": "/backend/uploads/(.*)", "destination": "http://68.183.153.10:4000/uploads/$1" },
+    { "source": "/backend/socket.io/(.*)", "destination": "http://68.183.153.10:4000/socket.io/$1" },
     { "source": "/(.*)", "destination": "/" }
   ]
 }

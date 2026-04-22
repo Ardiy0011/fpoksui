@@ -23,7 +23,7 @@ type RegistryItem = {
   is_visible: boolean
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/backend' : 'http://localhost:4000')
 
 function resolveUrl(url: string) {
   return url.startsWith('/') ? `${API_BASE_URL}${url}` : url
