@@ -519,7 +519,17 @@ function App() {
 
         {/* ── Footer ── */}
         <footer className="main-footer">
-          <p>niiArdey <span className="footer-highlight">Dev</span> © 2026</p>
+          <p>
+            <a
+              className="footer-link"
+              href="https://niiardeydev-zp2y.vercel.app/wed"
+              target="_blank"
+              rel="noreferrer"
+            >
+              niiArdey <span className="footer-highlight">Dev</span>
+            </a>{' '}
+            © 2026
+          </p>
         </footer>
       </main>
 
