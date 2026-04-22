@@ -1,22 +1,31 @@
 .admin-page {
     min-height: 100vh;
+    min-height: 100dvh;
     padding: 0 1rem 2.5rem;
-    background: #f5f3ee;
-    color: #3a3224;
-    font-family: var(--font-sans);
+    background:
+        radial-gradient(1200px 500px at 5% -10%, rgba(201, 168, 76, 0.15), transparent 60%),
+        radial-gradient(900px 500px at 95% -20%, rgba(220, 185, 120, 0.1), transparent 65%),
+        var(--surface, #16120f);
+    color: var(--on-surface, #ede6db);
+    font-family: var(--font-body);
 }
 
 /* Login */
 .admin-login {
-    max-width: 360px;
-    margin: 15vh auto 0;
+    max-width: 420px;
+    margin: 12vh auto 0;
     text-align: center;
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: rgba(29, 24, 20, 0.72);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
 }
 
 .admin-login-title {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: #2f261a;
+    font-size: 1.7rem;
+    color: var(--on-surface, #ede6db);
     margin-bottom: 1rem;
 }
 
@@ -28,23 +37,29 @@
 
 .admin-login-form input {
     padding: 0.7rem 0.8rem;
-    border: 1px solid rgba(165, 128, 71, 0.25);
+    border: 1px solid rgba(201, 168, 76, 0.25);
     border-radius: 10px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8f2e8;
     font-size: 0.9rem;
     outline: none;
 }
 
+.admin-login-form input::placeholder {
+    color: rgba(233, 220, 203, 0.65);
+}
+
 .admin-login-form input:focus {
-    border-color: #a58047;
+    border-color: #c9a84c;
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.14);
 }
 
 .admin-login-form button {
     padding: 0.75rem;
     border: none;
     border-radius: 10px;
-    background: #7f5c2d;
-    color: #fff;
+    background: linear-gradient(120deg, #c9a84c 0%, #d8b876 100%);
+    color: #2f261a;
     font-weight: 700;
     font-size: 0.9rem;
     cursor: pointer;
@@ -55,7 +70,7 @@
 }
 
 .admin-error {
-    color: #a32929;
+    color: #ff9f8c;
     font-size: 0.82rem;
     margin: 0;
 }
@@ -63,7 +78,7 @@
 .admin-dev-hint {
     margin-top: 1rem;
     font-size: 0.72rem;
-    color: #9a8868;
+    color: rgba(212, 193, 168, 0.72);
 }
 
 /* Header */
@@ -79,15 +94,16 @@
 .admin-header h1 {
     margin: 0;
     font-family: var(--font-serif);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    color: var(--on-surface, #ede6db);
 }
 
 .admin-logout {
     padding: 0.4rem 0.8rem;
-    border: 1px solid rgba(165, 128, 71, 0.3);
+    border: 1px solid rgba(201, 168, 76, 0.35);
     border-radius: 8px;
-    background: transparent;
-    color: #7a5a2e;
+    background: rgba(201, 168, 76, 0.08);
+    color: #e9d7b7;
     font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
@@ -99,7 +115,7 @@
     margin: 0 auto;
     display: flex;
     gap: 0.3rem;
-    border-bottom: 1px solid rgba(165, 128, 71, 0.15);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
     padding-bottom: 0;
 }
 
@@ -109,15 +125,15 @@
     background: transparent;
     font-size: 0.82rem;
     font-weight: 600;
-    color: #7a6d5a;
+    color: rgba(230, 215, 188, 0.72);
     cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
 }
 
 .admin-tabs button.active {
-    color: #7f5c2d;
-    border-bottom-color: #7f5c2d;
+    color: #e7d6b8;
+    border-bottom-color: #c9a84c;
 }
 
 .admin-status {
@@ -125,9 +141,9 @@
     margin: 0.6rem auto 0;
     padding: 0.4rem 0.6rem;
     border-radius: 8px;
-    background: rgba(165, 128, 71, 0.08);
+    background: rgba(201, 168, 76, 0.12);
     font-size: 0.82rem;
-    color: #5c4d34;
+    color: #e8d9bd;
 }
 
 .admin-section {
@@ -136,7 +152,7 @@
 }
 
 .admin-empty {
-    color: #7a6d5a;
+    color: rgba(230, 215, 188, 0.72);
     text-align: center;
     margin-top: 2rem;
 }
@@ -152,8 +168,8 @@
     align-items: center;
     gap: 0.7rem;
     padding: 0.5rem 0.7rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(165, 128, 71, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 168, 76, 0.15);
     border-radius: 10px;
 }
 
@@ -162,7 +178,7 @@
     height: 48px;
     border-radius: 8px;
     overflow: hidden;
-    background: #ece4d3;
+    background: rgba(201, 168, 76, 0.14);
     flex-shrink: 0;
 }
 
@@ -197,15 +213,15 @@
 
 .admin-media-meta {
     font-size: 0.72rem;
-    color: #9a8868;
+    color: rgba(230, 215, 188, 0.72);
 }
 
 .admin-delete-btn {
     padding: 0.35rem 0.7rem;
-    border: 1px solid rgba(160, 40, 40, 0.2);
+    border: 1px solid rgba(255, 143, 143, 0.28);
     border-radius: 6px;
     background: transparent;
-    color: #a04040;
+    color: #ffb3a5;
     font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
@@ -213,7 +229,7 @@
 }
 
 .admin-delete-btn:hover {
-    background: rgba(160, 40, 40, 0.06);
+    background: rgba(255, 143, 143, 0.12);
 }
 
 /* Registry form */
@@ -226,14 +242,16 @@
 .admin-registry-form h3 {
     margin: 0;
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: 1.05rem;
+    color: #f1e5d1;
 }
 
 .admin-registry-form input {
     padding: 0.55rem 0.7rem;
-    border: 1px solid rgba(165, 128, 71, 0.25);
+    border: 1px solid rgba(201, 168, 76, 0.25);
     border-radius: 8px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.04);
+    color: #f8f2e8;
     font-size: 0.85rem;
     outline: none;
 }
@@ -242,8 +260,8 @@
     padding: 0.6rem;
     border: none;
     border-radius: 8px;
-    background: #7f5c2d;
-    color: #fff;
+    background: linear-gradient(120deg, #c9a84c 0%, #d8b876 100%);
+    color: #2f261a;
     font-weight: 700;
     cursor: pointer;
 }
@@ -259,15 +277,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.55rem 0.7rem;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(165, 128, 71, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 168, 76, 0.15);
     border-radius: 10px;
 }
 
 .admin-registry-progress {
     display: block;
     font-size: 0.75rem;
-    color: #7a6d5a;
+    color: rgba(230, 215, 188, 0.72);
 }
 
 /* Settings */
@@ -286,15 +304,16 @@
 .admin-setting-row label span {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #5c4d34;
+    color: #e8d9bd;
 }
 
 .admin-setting-row input {
     width: 80px;
     padding: 0.55rem 0.7rem;
-    border: 1px solid rgba(165, 128, 71, 0.25);
+    border: 1px solid rgba(201, 168, 76, 0.25);
     border-radius: 8px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.04);
+    color: #f8f2e8;
     font-size: 0.9rem;
     outline: none;
 }
@@ -303,8 +322,24 @@
     padding: 0.55rem 1rem;
     border: none;
     border-radius: 8px;
-    background: #7f5c2d;
-    color: #fff;
+    background: linear-gradient(120deg, #c9a84c 0%, #d8b876 100%);
+    color: #2f261a;
     font-weight: 700;
     cursor: pointer;
+}
+
+@media (max-width: 560px) {
+    .admin-login {
+        margin-top: 10vh;
+        padding: 1rem;
+    }
+
+    .admin-tabs {
+        gap: 0.15rem;
+    }
+
+    .admin-tabs button {
+        padding: 0.55rem 0.7rem;
+        font-size: 0.77rem;
+    }
 }

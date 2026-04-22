@@ -36,7 +36,16 @@ type QuotaResponse = {
   remaining: { images: number; videos: number }
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/backend' : 'http://localhost:4000')
+const API_BASE_URL = (() => {
+  const raw = import.meta.env.VITE_API_BASE_URL?.trim()
+  if (!raw) return import.meta.env.PROD ? '/backend' : 'http://localhost:4000'
+
+  if (typeof window !== 'undefined' && window.location.protocol === 'https:' && raw.startsWith('http://')) {
+    return '/backend'
+  }
+
+  return raw.endsWith('/') ? raw.slice(0, -1) : raw
+})()
 const DEFAULT_UPLOAD_LIMIT = 5
 const PAGE_SIZE = 15
 
