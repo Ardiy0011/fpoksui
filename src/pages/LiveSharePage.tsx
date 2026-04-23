@@ -695,6 +695,17 @@ export default function LiveSharePage() {
           </div>
         </div>
       )}
+
+      <footer className="page-credit">
+        <a
+          className="page-credit-link"
+          href="https://niiardeydev-zp2y.vercel.app/wed"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Nii Ardey Dev
+        </a>
+      </footer>
     </main>
     </>
   )

@@ -219,6 +219,20 @@ export default function GalleryPage() {
           </div>
         </div>
       )}
+
+      <footer className="main-footer">
+        <p>
+          <a
+            className="footer-link"
+            href="https://niiardeydev-zp2y.vercel.app/wed"
+            target="_blank"
+            rel="noreferrer"
+          >
+            niiArdey <span className="footer-highlight">Dev</span>
+          </a>{' '}
+          © 2026
+        </p>
+      </footer>
     </main>
   )
 }

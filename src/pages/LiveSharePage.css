@@ -770,6 +770,27 @@
     height: 28px;
 }
 
+.page-credit {
+    max-width: 720px;
+    margin: 1.4rem auto 0;
+    padding-top: 0.9rem;
+    text-align: center;
+    border-top: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+.page-credit-link {
+    color: var(--on-surface-variant, #a09686);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.page-credit-link:hover {
+    color: var(--primary, #c9a84c);
+}
+
 /* ── Upload Modal ── */
 .upload-modal-overlay {
     position: fixed;
