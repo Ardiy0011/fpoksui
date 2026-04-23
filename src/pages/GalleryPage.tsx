@@ -64,65 +64,67 @@ export default function GalleryPage() {
 
   return (
     <main className="gallery-page">
-      {notification && (
-        <div className="gallery-notification" key={notification}>
-          {notification}
+      <div className="gallery-page-content">
+        {notification && (
+          <div className="gallery-notification" key={notification}>
+            {notification}
+          </div>
+        )}
+
+        <header className="gallery-bar">
+          <Link to="/" className="gallery-bar-back" aria-label="Back to home">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </Link>
+          <div className="gallery-bar-center">
+            <h1 className="gallery-bar-title">Couples Gallery</h1>
+            <span className="gallery-bar-count">{filtered.length} photos</span>
+          </div>
+          <div style={{ width: 34 }} />
+        </header>
+
+        <div className="gallery-filters">
+          <button className={`filter-chip ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
+          <button className={`filter-chip ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
+          <button className={`filter-chip ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
         </div>
-      )}
 
-      <header className="gallery-bar">
-        <Link to="/" className="gallery-bar-back" aria-label="Back to home">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </Link>
-        <div className="gallery-bar-center">
-          <h1 className="gallery-bar-title">Couples Gallery</h1>
-          <span className="gallery-bar-count">{filtered.length} photos</span>
-        </div>
-        <div style={{ width: 34 }} />
-      </header>
+        <div className="gallery-grid">
+          {filtered.map((item) => (
+            (() => {
+              const isFeaturedVideoInAllTab = filter === 'all' && item.id === 'fv1'
 
-      <div className="gallery-filters">
-        <button className={`filter-chip ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
-        <button className={`filter-chip ${filter === 'image' ? 'active' : ''}`} onClick={() => setFilter('image')}>Photos</button>
-        <button className={`filter-chip ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>Videos</button>
-      </div>
-
-      <div className="gallery-grid">
-        {filtered.map((item) => (
-          (() => {
-            const isFeaturedVideoInAllTab = filter === 'all' && item.id === 'fv1'
-
-            return (
-              <div
-                key={item.id}
-                className={`gallery-card ${isFeaturedVideoInAllTab ? 'gallery-card--featured-video' : ''}`}
-                onClick={() => {
-                  if (isFeaturedVideoInAllTab) return
-                  setLightbox(item)
-                  setMenuOpen(false)
-                }}
-                role={isFeaturedVideoInAllTab ? undefined : 'button'}
-                tabIndex={isFeaturedVideoInAllTab ? -1 : 0}
-                onKeyDown={(e) => {
-                  if (isFeaturedVideoInAllTab) return
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
+              return (
+                <div
+                  key={item.id}
+                  className={`gallery-card ${isFeaturedVideoInAllTab ? 'gallery-card--featured-video' : ''}`}
+                  onClick={() => {
+                    if (isFeaturedVideoInAllTab) return
                     setLightbox(item)
                     setMenuOpen(false)
-                  }
-                }}
-              >
-                {item.type === 'image' ? (
-                  <img src={item.url_thumb} alt="" loading="lazy" />
-                ) : (
-                  <div className="gallery-video-thumb">
-                    <video src={item.url_thumb} muted autoPlay loop playsInline preload="metadata" />
-                  </div>
-                )}
-              </div>
-            )
-          })()
-        ))}
+                  }}
+                  role={isFeaturedVideoInAllTab ? undefined : 'button'}
+                  tabIndex={isFeaturedVideoInAllTab ? -1 : 0}
+                  onKeyDown={(e) => {
+                    if (isFeaturedVideoInAllTab) return
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setLightbox(item)
+                      setMenuOpen(false)
+                    }
+                  }}
+                >
+                  {item.type === 'image' ? (
+                    <img src={item.url_thumb} alt="" loading="lazy" />
+                  ) : (
+                    <div className="gallery-video-thumb">
+                      <video src={item.url_thumb} muted autoPlay loop playsInline preload="metadata" />
+                    </div>
+                  )}
+                </div>
+              )
+            })()
+          ))}
+        </div>
       </div>
 
       {/* Lightbox */}
