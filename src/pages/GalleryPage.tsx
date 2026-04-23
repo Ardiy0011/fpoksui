@@ -14,6 +14,7 @@ import journeyImg9 from '../assets/Journeyimages/photo_2026-04-20_11-49-48.jpg'
 import journeyImg10 from '../assets/Journeyimages/photo_2026-04-20_11-49-51.jpg'
 import bg1 from '../assets/bg1.jpg'
 import bg2 from '../assets/bg2.jpg'
+import fipoksEngagementVid from '../assets/vids/fipoksengagementvid.mp4'
 
 type GalleryItem = {
   id: string
@@ -26,6 +27,7 @@ type GalleryItem = {
 
 /* Dummy images from Journey folder shown when the real gallery is empty */
 const DUMMY_ITEMS: GalleryItem[] = [
+  { id: 'fv1', type: 'video', url_thumb: fipoksEngagementVid, url_medium: fipoksEngagementVid, url_full: fipoksEngagementVid, created_at: '2026-04-25T09:55:00Z' },
   { id: 'd1', type: 'image', url_thumb: journeyImg1, url_medium: journeyImg1, url_full: journeyImg1, created_at: '2026-04-25T10:00:00Z' },
   { id: 'd2', type: 'image', url_thumb: journeyImg2, url_medium: journeyImg2, url_full: journeyImg2, created_at: '2026-04-25T10:05:00Z' },
   { id: 'd3', type: 'image', url_thumb: journeyImg3, url_medium: journeyImg3, url_full: journeyImg3, created_at: '2026-04-25T10:10:00Z' },
@@ -89,7 +91,7 @@ export default function GalleryPage() {
         {filtered.map((item) => (
           <div
             key={item.id}
-            className="gallery-card"
+            className={`gallery-card ${filter === 'all' && item.id === 'fv1' ? 'gallery-card--featured-video' : ''}`}
             onClick={() => { setLightbox(item); setMenuOpen(false) }}
             role="button"
             tabIndex={0}
@@ -98,7 +100,7 @@ export default function GalleryPage() {
               <img src={item.url_thumb} alt="" loading="lazy" />
             ) : (
               <div className="gallery-video-thumb">
-                <video src={item.url_thumb} muted preload="metadata" />
+                <video src={item.url_thumb} muted autoPlay loop playsInline preload="metadata" />
                 <span className="play-icon">▶</span>
               </div>
             )}
@@ -142,7 +144,7 @@ export default function GalleryPage() {
             {lightbox.type === 'image' ? (
               <img src={lightbox.url_full} alt="" />
             ) : (
-              <video src={lightbox.url_full} controls autoPlay />
+              <video src={lightbox.url_full} controls autoPlay loop playsInline />
             )}
             <div className="lightbox-actions">
               <a

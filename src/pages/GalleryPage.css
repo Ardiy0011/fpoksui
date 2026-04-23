@@ -131,6 +131,11 @@
     position: relative;
 }
 
+.gallery-card--featured-video {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+}
+
 .gallery-card::after {
     content: '';
     position: absolute;
