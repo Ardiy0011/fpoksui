@@ -134,6 +134,7 @@
 .gallery-card--featured-video {
     grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
+    cursor: default;
 }
 
 .gallery-card::after {

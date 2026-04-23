@@ -89,22 +89,39 @@ export default function GalleryPage() {
 
       <div className="gallery-grid">
         {filtered.map((item) => (
-          <div
-            key={item.id}
-            className={`gallery-card ${filter === 'all' && item.id === 'fv1' ? 'gallery-card--featured-video' : ''}`}
-            onClick={() => { setLightbox(item); setMenuOpen(false) }}
-            role="button"
-            tabIndex={0}
-          >
-            {item.type === 'image' ? (
-              <img src={item.url_thumb} alt="" loading="lazy" />
-            ) : (
-              <div className="gallery-video-thumb">
-                <video src={item.url_thumb} muted autoPlay loop playsInline preload="metadata" />
-                <span className="play-icon">▶</span>
+          (() => {
+            const isFeaturedVideoInAllTab = filter === 'all' && item.id === 'fv1'
+
+            return (
+              <div
+                key={item.id}
+                className={`gallery-card ${isFeaturedVideoInAllTab ? 'gallery-card--featured-video' : ''}`}
+                onClick={() => {
+                  if (isFeaturedVideoInAllTab) return
+                  setLightbox(item)
+                  setMenuOpen(false)
+                }}
+                role={isFeaturedVideoInAllTab ? undefined : 'button'}
+                tabIndex={isFeaturedVideoInAllTab ? -1 : 0}
+                onKeyDown={(e) => {
+                  if (isFeaturedVideoInAllTab) return
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setLightbox(item)
+                    setMenuOpen(false)
+                  }
+                }}
+              >
+                {item.type === 'image' ? (
+                  <img src={item.url_thumb} alt="" loading="lazy" />
+                ) : (
+                  <div className="gallery-video-thumb">
+                    <video src={item.url_thumb} muted autoPlay loop playsInline preload="metadata" />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            )
+          })()
         ))}
       </div>
 
